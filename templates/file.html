@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+
+<p>Към дата :</p>
+ 	{% if errors %}
+        
+            {% for error in errors %}
+            <li style="display:inline;color:red">{{ error }}</li>
+            {% endfor %}
+        
+    {% endif %}
+<form style="display:inline" action="../file/" method="get">
+    <input type="date" name="q">
+    
+	<input type="checkbox" name="dateBox"/> From beginning of time<br />
+	<select name="d" style="display:inline">
+		<option>All divisions</option>
+	  <option>Male</option>
+	  <option>Female</option>
+	</select>
+	<input type="submit" value="Search">
+	{% if query %}
+	<p>You searched for: <strong>{{ query }}</strong></p>
+{% endif %}	
+</form>
+
+<table border = "4" class="sortable" width="100%" cellpadding="2" cellspacing="1">
+<thead>
+    <tr>
+	<th width='33%'>Player name</th>
+	<th>Last team</th>
+	<th>Division</th> 
+	<!--
+	<th>Sex female</th>
+	<th>Birthdate</th>
+	<th>Started bowling</th>
+	
+	<th>Card</th> 
+	  	 -->	
+	</tr>
+</thead>
+<tbody>
+	{% for entry in entries %}
+	    <tr>
+	    <td><a href="{{ entry.id }}">{{ entry.playername|cap }}</a></td>
+	    <td>
+	    	{% if entry.lastteam %}
+	    		<a href="../teams/{{ entry.lastteam.id }}">{{ entry.lastteam|capfirst }}</a>	    		
+	    	{% else %}
+	    		{{ entry.lastteam|capfirst }}
+	    	{% endif %}
+	    </td>
+	    <td>{{ entry.division_type }}</td>
+	    </tr>
+	{% endfor %}
+</tbody>
+</table>
+{% endblock %}

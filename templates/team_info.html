@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<title>Player info</title>
+		<style type="text/css"> 
+			@font-face
+			{
+			font-family: myFirstFont;
+			src: url('http://www.w3schools.com/css3/Sansation_Light.ttf');
+			}
+			
+			body
+			{
+			font-family:myFirstFont;
+			}
+		</style>
+		<script type="text/javascript" src="/media/sorttable.js"></script>
+	</head>
+	<body>
+		<a href="/bbf" style="font: bold">Home</a>
+		<table border = "4" class="sortable" width="100%" cellpadding="2" cellspacing="1">
+<thead>
+    <tr>
+	<th>Team name</th>
+	<th>Established</th>
+	<th>Members</th>
+	<th>Logo</th>
+	<th>Date terminated</th>	
+	<th>Parent team</th> 	  	 	
+	</tr>
+</thead>
+<tbody>
+	{% for q in query %}
+	    <tr>
+	    <td>{{ q.teamname|capfirst }}</td>
+	    <td>{{ q.established }}</td>	    
+	    <td>{{ q.memberscount }}</td>
+	    <td>{{ q.logo }}</td>
+	    <td>{{ q.dateterminated }}</td>	    
+	    <td>
+	    	{% if q.parentteam %}
+	    		<a href="../../teams/{{ q.parentteam.id }}">{{ q.parentteam|capfirst }}</a>	    		
+	    	{% else %}
+	    		{{ q.parentteam|capfirst }}
+	    	{% endif %}
+	    	
+	    </td>	    
+	    </tr>
+	{% endfor %}
+</tbody>
+</table>
+	</body>
+</html>

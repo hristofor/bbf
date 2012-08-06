@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+	<script type="text/javascript" src="/media/sorttable.js"></script>
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    {% block title %} {% endblock %}
+    <style type="text/css"> 
+			@font-face
+			{
+			font-family: myFirstFont;
+			src: url('http://www.w3schools.com/css3/Sansation_Light.ttf');
+			}
+			
+			body
+			{
+			font-family:myFirstFont;
+			}			
+	</style>
+	<script type="text/javascript">                                         
+	   // we will add our javascript code here     
+	   $(document).ready(function() {
+		   // do stuff when DOM is ready
+		  $('[name=q]').val('{{ date }}')	
+		  $('[name=d]').val('{{ division }}')
+		  $('[name=dateBox]').click(function(){
+		  	if ($('input[name=q]').prop('disabled') == false){
+		  		$('input[name=q]').prop('disabled', true);
+		  	}else{
+		  		$('input[name=q]').prop('disabled', false);
+		  	}
+        });	   
+	 	});                                
+ </script> 
+</head>
+<body>	
+	<a href="/bbf" style="font: bold">Home</a>
+	{% block content %}
+	{% endblock %}
+	
+</body>
+</html>
+	    

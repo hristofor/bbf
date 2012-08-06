@@ -1,0 +1,13 @@
+{% load custom_filters %}
+<p>You searched for: <strong>{{ query }}</strong></p>
+
+{% if files %}
+    <p>Found {{ files|length }} file{{ files|pluralize }}.</p>
+    <ul>
+        {% for file in files %}
+        <li>{{ file.playername|cap }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No files matched your search criteria.</p>
+{% endif %}

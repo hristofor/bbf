@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table border="4" class="sortable" width="100%">
+	<tr>
+	<th>Name</th>
+	<th>City</th>
+	<th>Manifacturer</th>
+	<th>Lanes</th>
+	<th>Machine</th>
+	<th>Date opened</th>
+	<th>Active</th>
+	<th>Logo</th>
+	</tr>
+	
+	{% for entry in entries %}
+	    <tr>
+	    <td>{{ entry.name }}</td>
+	    <td>{{ entry.city }}</td>
+	    <td>{{ entry.manifacturer }}</td>
+	    <td align="center">{{ entry.lanes }}</td>
+	    <td>{{ entry.machine }}</td>
+	    <td>{{ entry.dateopened }}</td>
+	    <td align="center">
+	    	{% if entry.active %}
+	    		&#10004
+	    	{% else %}
+	    		&#10008
+	    	{% endif %}	    	
+	    </td>
+	    <td>{{ entry.logo }}</td>
+	    </tr>
+	{% endfor %}
+
+</table>
+{% endblock %}

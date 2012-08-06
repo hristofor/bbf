@@ -1,0 +1,65 @@
+{% load custom_filters %}
+
+<html>
+	<head>
+		<title>Player info</title>
+		<style type="text/css"> 
+			@font-face
+			{
+			font-family: myFirstFont;
+			src: url('http://www.w3schools.com/css3/Sansation_Light.ttf');
+			}
+			
+			body
+			{
+			font-family:myFirstFont;
+			}
+		</style>
+		<script type="text/javascript" src="/media/sorttable.js"></script>
+	</head>
+	<body>
+		<a href="/bbf" style="font: bold">Home</a>
+		<table border = "4" class="sortable" width="100%" cellpadding="2" cellspacing="1">
+<thead>
+    <tr>
+	<th>Player name</th>
+	<th>Last team</th>
+	<th>Division</th>
+	<th>Birthdate</th>
+	<th>Started bowling</th>
+	
+	<th>Card</th> 
+	  	 	
+	</tr>
+</thead>
+<tbody>
+	{% for q in query %}
+	    <tr>
+	    <td>{{ q.playername|cap }}</td>
+	    <td>
+	    	{% if q.lastteam %}
+	    		<a href="../../teams/{{ q.lastteam.id }}">{{ q.lastteam|capfirst }}</a>	    		
+	    	{% else %}
+	    		{{ q.lastteam|capfirst }}
+	    	{% endif %}
+	    	
+	    </td>	
+	    <!--
+	    {% if q.sexfemale == 0 %}
+	    	<td>male</td>
+	    {% else %}
+	    	<td>female</td>
+	    {% endif %}
+	    -->
+	    <td>{{ q.division_type }}</td>
+	    <td>{{ q.birthdate }}</td>
+	    <td>{{ q.startedbowling }}</td>
+	    
+	    <td>{{ q.card }}</td>
+	    
+	    </tr>
+	{% endfor %}
+</tbody>
+</table>
+	</body>
+</html>

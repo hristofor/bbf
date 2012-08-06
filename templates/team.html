@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p>Към дата :</p>
+ 	{% if errors %}
+        
+            {% for error in errors %}
+            <li style="display:inline;color:red">{{ error }}</li>
+            {% endfor %}
+        
+    {% endif %}
+<form style="display:inline" action="../team/" method="get">
+    <input type="date" name="q">
+    <input type="submit" value="Search">
+</form>
+<input type="checkbox" name="dateBox"/> From beginning of time<br />
+{% if query %}
+	<p>You searched for: <strong>{{ query }}</strong></p>
+{% endif %}
+<table border = "4" class="sortable" width="100%" cellpadding="1" cellspacing="2">
+	<tr>
+	<th>Team name</th>
+	<th>Established</th>
+	<th>Members</th>
+	<th>Logo</th>
+	<th>Date terminated</th>
+	<th>Parent team</th>
+	</tr>
+	
+	{% for entry in entries %}
+	    <tr>
+	    <td><a href="../teams/{{ entry.id }}">{{ entry.teamname|capfirst }}</a></td>
+	    <td>{{ entry.established }}</td>
+	    <td>{{ entry.memberscount }}</td>
+	    <td>{{ entry.logo }}</td>
+	    <td>{{ entry.dateterminated }}</td>
+	    <td>
+	    	{% if entry.parentteam %}
+	    		<a href="../teams/{{ entry.parentteam.id }}">{{ entry.parentteam|capfirst }}</a>	    		
+	    	{% else %}
+	    		{{ entry.parentteam|capfirst }}
+	    	{% endif %}
+	    	
+	    </td>
+	    </tr>
+	{% endfor %}
+</table>
+{% endblock %}
